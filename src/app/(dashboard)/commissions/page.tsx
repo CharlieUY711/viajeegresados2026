@@ -62,7 +62,7 @@ function RoleBadge({ role }: { role: ReturnType<typeof getUserRole> }) {
 function VisibilityIcon({ isPrivate }: { isPrivate: boolean }) {
   return isPrivate
     ? <Lock size={11} className="text-amber-500 flex-shrink-0"  />
-    : <Globe size={11} className="text-navy-300 flex-shrink-0" title="PÃºblico" />;
+    : <Globe size={11} className="text-navy-300 flex-shrink-0" />;
 }
 
 // â”€â”€â”€ Main Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -229,7 +229,7 @@ export default function CommissionsPage() {
                     <button
                       onClick={() => handleDelete(c.id)}
                       className="p-1.5 rounded-lg text-navy-300 hover:text-red-500 hover:bg-red-50 transition-colors"
-                      title="Eliminar comisiÃ³n"
+                     
                     >
                       <Trash2 size={13} />
                     </button>
@@ -353,7 +353,7 @@ export default function CommissionsPage() {
       })}
 
       {/* Create commission modal */}
-      <Modal open={createModal} onClose={() => setCreateModal(false)} title="Nueva comisiÃ³n" size="md">
+      <Modal open={createModal} onClose={() => setCreateModal(false)} size="md">
         <div className="space-y-4">
           <div className="p-3 rounded-xl bg-blue-50 border border-blue-100 text-xs text-blue-700 space-y-1">
             <p className="font-semibold flex items-center gap-1"><Eye size={12} /> Vista pÃºblica</p>
@@ -389,7 +389,7 @@ export default function CommissionsPage() {
       </Modal>
 
       {/* Add task modal */}
-      <Modal open={!!taskModal} onClose={() => setTaskModal(null)} title="Nueva tarea" size="sm">
+      <Modal open={!!taskModal} onClose={() => setTaskModal(null)} size="sm">
         <div className="space-y-4">
           <div>
             <label className="label-base">TÃ­tulo *</label>
@@ -409,7 +409,7 @@ export default function CommissionsPage() {
       </Modal>
 
       {/* Add note modal */}
-      <Modal open={!!noteModal} onClose={() => setNoteModal(null)} title="Nueva nota" size="sm">
+      <Modal open={!!noteModal} onClose={() => setNoteModal(null)} size="sm">
         <div className="space-y-4">
           <div>
             <label className="label-base">Contenido *</label>
