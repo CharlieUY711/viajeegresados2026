@@ -1,14 +1,14 @@
 "use client";
 
-import { useLang, type LangCode } from "@/lib/i18n";
+import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const FLAGS: Record<LangCode, string> = {
+const FLAGS: Record<string, string> = {
   es: "🇦🇷",
   pt: "🇧🇷",
 };
 
-const LABELS: Record<LangCode, string> = {
+const LABELS: Record<string, string> = {
   es: "ES",
   pt: "PT",
 };
