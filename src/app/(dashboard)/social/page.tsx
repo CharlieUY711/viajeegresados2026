@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { ExternalLink, Users, Globe } from "lucide-react";
@@ -11,7 +11,7 @@ import type { SocialHandle, SocialPlatform, User } from "@/types";
 
 const PLATFORMS: SocialPlatform[] = ["instagram", "tiktok", "facebook", "youtube"];
 
-// ─── Platform icon SVGs ───────────────────────────────────────────────────────
+// â”€â”€â”€ Platform icon SVGs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function PlatformIcon({ platform, size = 18 }: { platform: SocialPlatform; size?: number }) {
   const icons: Record<SocialPlatform, JSX.Element> = {
     instagram: (
@@ -41,7 +41,7 @@ function PlatformIcon({ platform, size = 18 }: { platform: SocialPlatform; size?
   return icons[platform];
 }
 
-// ─── User card with their social handles ─────────────────────────────────────
+// â”€â”€â”€ User card with their social handles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function UserSocialCard({ user, handles }: { user: User; handles: SocialHandle[] }) {
   if (handles.length === 0) return null;
   return (
@@ -78,7 +78,7 @@ function UserSocialCard({ user, handles }: { user: User; handles: SocialHandle[]
   );
 }
 
-// ─── Group accounts section ───────────────────────────────────────────────────
+// â”€â”€â”€ Group accounts section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function GroupAccounts({ handles }: { handles: SocialHandle[] }) {
   if (handles.length === 0) return null;
   return (
@@ -113,7 +113,7 @@ function GroupAccounts({ handles }: { handles: SocialHandle[] }) {
   );
 }
 
-// ─── Filter bar ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Filter bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FilterBar({ active, onChange }: { active: SocialPlatform | "all"; onChange: (v: SocialPlatform | "all") => void }) {
   return (
     <div className="flex gap-2 flex-wrap">
@@ -150,7 +150,7 @@ function FilterBar({ active, onChange }: { active: SocialPlatform | "all"; onCha
   );
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Main page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function SocialPage() {
   const [handles, setHandles]   = useState<(SocialHandle & { user?: User })[]>([]);
   const [users, setUsers]       = useState<User[]>([]);
@@ -165,7 +165,7 @@ export default function SocialPage() {
         supabase.from("users").select("id, full_name, avatar_url, role").order("full_name"),
       ]);
       setHandles(handlesData);
-      setUsers(usersRes.data ?? []);
+      setUsers((usersRes.data ?? []) as any[]);
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
   }, []);
@@ -207,8 +207,8 @@ export default function SocialPage() {
         <div className="text-center py-16 text-navy-400">Cargando...</div>
       ) : usersWithHandles.length === 0 ? (
         <div className="text-center py-16 text-navy-400">
-          <p className="text-sm">Ningún usuario ha agregado redes sociales todavía.</p>
-          <p className="text-xs mt-1">Podés agregar las tuyas desde tu perfil.</p>
+          <p className="text-sm">NingÃºn usuario ha agregado redes sociales todavÃ­a.</p>
+          <p className="text-xs mt-1">PodÃ©s agregar las tuyas desde tu perfil.</p>
         </div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
