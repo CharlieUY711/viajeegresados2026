@@ -353,7 +353,7 @@ export default function CommissionsPage() {
       })}
 
       {/* Create commission modal */}
-      <Modal open={createModal} onClose={() => setCreateModal(false)} size="md">
+      <Modal open={createModal} onClose={() => setCreateModal(false)} title="Nueva comision" size="md">
         <div className="space-y-4">
           <div className="p-3 rounded-xl bg-blue-50 border border-blue-100 text-xs text-blue-700 space-y-1">
             <p className="font-semibold flex items-center gap-1"><Eye size={12} /> Vista pÃºblica</p>
@@ -389,7 +389,7 @@ export default function CommissionsPage() {
       </Modal>
 
       {/* Add task modal */}
-      <Modal open={!!taskModal} onClose={() => setTaskModal(null)} size="sm">
+      <Modal open={!!taskModal} onClose={() => setTaskModal(null)} title="Nueva tarea" size="sm">
         <div className="space-y-4">
           <div>
             <label className="label-base">TÃ­tulo *</label>
@@ -409,7 +409,7 @@ export default function CommissionsPage() {
       </Modal>
 
       {/* Add note modal */}
-      <Modal open={!!noteModal} onClose={() => setNoteModal(null)} size="sm">
+      <Modal open={!!noteModal} onClose={() => setNoteModal(null)} title="Nueva nota" size="sm">
         <div className="space-y-4">
           <div>
             <label className="label-base">Contenido *</label>
