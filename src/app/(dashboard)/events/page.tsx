@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Plus, Calendar, List, MapPin, Users, Edit2, Trash2, Search, Clock } from "lucide-react";
@@ -73,7 +73,7 @@ export default function EventsPage() {
         title: form.title,
         description: form.description,
         date: new Date(form.date).toISOString(),
-        location: form.location || null,
+        location: form.location || undefined,
         category: form.category,
         status: "upcoming" as EventStatus,
         max_participants: form.max_participants ? parseInt(form.max_participants) : null,
