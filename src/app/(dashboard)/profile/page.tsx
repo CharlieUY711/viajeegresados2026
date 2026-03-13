@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import {
@@ -20,7 +20,7 @@ import type { CloudConnection, CloudProvider, SocialHandle, SocialPlatform } fro
 
 const PLATFORMS: SocialPlatform[] = ["instagram", "tiktok", "facebook", "youtube"];
 
-// ─── Change Password Modal ────────────────────────────────────────────────────
+// â”€â”€â”€ Change Password Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [form, setForm]           = useState({ current: "", next: "", confirm: "" });
   const [showCurrent, setShowCurrent] = useState(false);
@@ -38,15 +38,15 @@ function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => 
     setLoading(true); setError(null);
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user?.email) throw new Error("No se encontró el usuario");
+      if (!user?.email) throw new Error("No se encontrÃ³ el usuario");
       const { error: signInError } = await supabase.auth.signInWithPassword({ email: user.email, password: form.current });
-      if (signInError) throw new Error("La contraseña actual es incorrecta");
+      if (signInError) throw new Error("La contraseÃ±a actual es incorrecta");
       const { error: updateError } = await supabase.auth.updateUser({ password: form.next });
       if (updateError) throw updateError;
       setSuccess(true);
       setTimeout(() => { setSuccess(false); onClose(); setForm({ current: "", next: "", confirm: "" }); }, 1500);
     } catch (err: any) {
-      setError(err.message ?? "Error al cambiar la contraseña");
+      setError(err.message ?? "Error al cambiar la contraseÃ±a");
     } finally { setLoading(false); }
   };
 
@@ -55,12 +55,12 @@ function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => 
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950/40 backdrop-blur-sm px-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-base font-bold text-navy-900">Cambiar contraseña</h3>
+          <h3 className="text-base font-bold text-navy-900">Cambiar contraseÃ±a</h3>
           <button onClick={onClose} className="p-1 rounded-lg text-navy-300 hover:text-navy-600 transition-colors"><X size={16} /></button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label-base">Contraseña actual</label>
+            <label className="label-base">ContraseÃ±a actual</label>
             <div className="relative">
               <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-navy-300" />
               <input type={showCurrent ? "text" : "password"} value={form.current} onChange={e => setForm({ ...form, current: e.target.value })} className="input-base pl-9 pr-10" required />
@@ -70,7 +70,7 @@ function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => 
             </div>
           </div>
           <div>
-            <label className="label-base">Nueva contraseña</label>
+            <label className="label-base">Nueva contraseÃ±a</label>
             <div className="relative">
               <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-navy-300" />
               <input type={showNext ? "text" : "password"} value={form.next} onChange={e => setForm({ ...form, next: e.target.value })} className="input-base pl-9 pr-10" required />
@@ -80,12 +80,12 @@ function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => 
             </div>
           </div>
           <div>
-            <label className="label-base">Confirmar nueva contraseña</label>
+            <label className="label-base">Confirmar nueva contraseÃ±a</label>
             <div className="relative">
               <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-navy-300" />
               <input type="password" value={form.confirm} onChange={e => setForm({ ...form, confirm: e.target.value })} className={cn("input-base pl-9", form.confirm && !passwordsMatch && "border-red-300")} required />
             </div>
-            {form.confirm && !passwordsMatch && <p className="text-xs text-red-500 mt-1">Las contraseñas no coinciden</p>}
+            {form.confirm && !passwordsMatch && <p className="text-xs text-red-500 mt-1">Las contraseÃ±as no coinciden</p>}
           </div>
           {error && <div className="p-3 rounded-xl bg-red-50 border border-red-100 text-xs text-red-600">{error}</div>}
           <div className="flex justify-end gap-2 pt-1">
@@ -100,7 +100,7 @@ function ChangePasswordModal({ open, onClose }: { open: boolean; onClose: () => 
   );
 }
 
-// ─── Cloud Sync Section ───────────────────────────────────────────────────────
+// â”€â”€â”€ Cloud Sync Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function CloudSyncSection({ userId }: { userId: string }) {
   const [connections, setConnections] = useState<CloudConnection[]>([]);
   const [loading, setLoading]         = useState(true);
@@ -115,23 +115,23 @@ function CloudSyncSection({ userId }: { userId: string }) {
   const handleConnect = (provider: CloudProvider) => {
     // In production: redirect to OAuth flow
     // For now, show a placeholder alert
-    alert(`Para conectar ${provider === "google_drive" ? "Google Drive" : "OneDrive"}, configurá las credenciales OAuth en tu proyecto.\n\nVer: cloudSyncService.getOAuthUrl()`);
+    alert(`Para conectar ${provider === "google_drive" ? "Google Drive" : "OneDrive"}, configurÃ¡ las credenciales OAuth en tu proyecto.\n\nVer: cloudSyncService.getOAuthUrl()`);
   };
 
   const handleDisconnect = async (provider: CloudProvider) => {
-    if (!confirm("¿Desconectar esta cuenta?")) return;
+    if (!confirm("Â¿Desconectar esta cuenta?")) return;
     await cloudSyncService.disconnect(userId, provider);
     setConnections(prev => prev.filter(c => c.provider !== provider));
   };
 
   const providers: { key: CloudProvider; label: string; icon: string; color: string }[] = [
-    { key: "google_drive", label: "Google Drive", icon: "🟦", color: "text-blue-600" },
-    { key: "onedrive",     label: "OneDrive",     icon: "🟧", color: "text-orange-500" },
+    { key: "google_drive", label: "Google Drive", icon: "ðŸŸ¦", color: "text-blue-600" },
+    { key: "onedrive",     label: "OneDrive",     icon: "ðŸŸ§", color: "text-orange-500" },
   ];
 
   return (
     <Card>
-      <CardHeader title="Respaldo en la nube" subtitle="Sincronizá galería y documentos con tu Drive" />
+      <CardHeader title="Respaldo en la nube" subtitle="SincronizÃ¡ galerÃ­a y documentos con tu Drive" />
       {loading ? (
         <p className="text-sm text-navy-400">Cargando...</p>
       ) : (
@@ -148,11 +148,11 @@ function CloudSyncSection({ userId }: { userId: string }) {
                   <div>
                     <p className={cn("text-sm font-semibold", color)}>{label}</p>
                     {connected && conn?.folder_name && (
-                      <p className="text-xs text-navy-400">📁 {conn.folder_name}</p>
+                      <p className="text-xs text-navy-400">ðŸ“ {conn.folder_name}</p>
                     )}
                     {connected && conn?.last_sync_at && (
                       <p className="text-xs text-navy-400">
-                        Últ. sync: {new Date(conn.last_sync_at).toLocaleDateString("es")}
+                        Ãšlt. sync: {new Date(conn.last_sync_at).toLocaleDateString("es")}
                       </p>
                     )}
                   </div>
@@ -178,7 +178,7 @@ function CloudSyncSection({ userId }: { userId: string }) {
             );
           })}
           <p className="text-xs text-navy-400 pt-1">
-            Una vez conectado, podrás sincronizar desde las páginas de Galería y Documentos.
+            Una vez conectado, podrÃ¡s sincronizar desde las pÃ¡ginas de GalerÃ­a y Documentos.
           </p>
         </div>
       )}
@@ -186,7 +186,7 @@ function CloudSyncSection({ userId }: { userId: string }) {
   );
 }
 
-// ─── Social Handles Section ───────────────────────────────────────────────────
+// â”€â”€â”€ Social Handles Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function SocialHandlesSection({ userId }: { userId: string }) {
   const [handles, setHandles]   = useState<SocialHandle[]>([]);
   const [loading, setLoading]   = useState(true);
@@ -220,7 +220,7 @@ function SocialHandlesSection({ userId }: { userId: string }) {
 
   return (
     <Card>
-      <CardHeader title="Redes sociales" subtitle="Tus perfiles visibles en la página de Redes" />
+      <CardHeader title="Redes sociales" subtitle="Tus perfiles visibles en la pÃ¡gina de Redes" />
       {loading ? <p className="text-sm text-navy-400">Cargando...</p> : (
         <div className="space-y-3">
           {handles.map(h => {
@@ -230,7 +230,7 @@ function SocialHandlesSection({ userId }: { userId: string }) {
                 <a href={h.profile_url} target="_blank" rel="noopener noreferrer"
                   className={cn("flex items-center gap-2 text-sm font-medium hover:underline", meta.color)}>
                   <Link2 size={13} />
-                  {meta.label} · @{h.handle}
+                  {meta.label} Â· @{h.handle}
                 </a>
                 <button onClick={() => handleDelete(h.platform)} className="p-1 rounded-lg text-navy-300 hover:text-red-500 transition-colors">
                   <Trash2 size={13} />
@@ -270,7 +270,7 @@ function SocialHandlesSection({ userId }: { userId: string }) {
               })}
             </div>
           ) : (
-            <p className="text-xs text-navy-400">Todas las redes están configuradas.</p>
+            <p className="text-xs text-navy-400">Todas las redes estÃ¡n configuradas.</p>
           )}
         </div>
       )}
@@ -278,7 +278,7 @@ function SocialHandlesSection({ userId }: { userId: string }) {
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// â”€â”€â”€ Main Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function ProfilePage() {
   const { t } = useLang();
   const p = t.profile;
@@ -313,7 +313,7 @@ export default function ProfilePage() {
       <Card>
         <div className="h-24 rounded-xl bg-sidebar-gradient -mx-5 -mt-5 mb-0 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(ellipse at 70% 50%, rgba(196,30,58,0.8) 0%, transparent 60%)" }} />
-          <div className="absolute bottom-0 right-4 text-4xl opacity-20">🎓</div>
+          <div className="absolute bottom-0 right-4 text-4xl opacity-20">ðŸŽ“</div>
         </div>
         <div className="flex items-end gap-4 -mt-8 relative z-10 mb-4">
           <div className="relative group">
@@ -333,9 +333,9 @@ export default function ProfilePage() {
         <div className="grid grid-cols-4 gap-3 pt-4 border-t border-cream-100">
           {[
             { value: user?.points ?? 0, label: p.points, icon: <Star size={13} className="text-red-400" /> },
-            { value: `#${user?.rank ?? "—"}`, label: "Ranking", icon: <Activity size={13} className="text-navy-400" /> },
-            { value: user?.events_joined ?? 0, label: p.events, icon: "📅" },
-            { value: user?.photos_uploaded ?? 0, label: p.photos, icon: "📸" },
+            { value: `#${user?.rank ?? "â€”"}`, label: "Ranking", icon: <Activity size={13} className="text-navy-400" /> },
+            { value: user?.events_joined ?? 0, label: p.events, icon: "ðŸ“…" },
+            { value: user?.photos_uploaded ?? 0, label: p.photos, icon: "ðŸ“¸" },
           ].map(({ value, label, icon }) => (
             <div key={label} className="text-center">
               <div className="flex justify-center mb-1">{typeof icon === "string" ? <span className="text-sm">{icon}</span> : icon}</div>
@@ -344,10 +344,10 @@ export default function ProfilePage() {
             </div>
           ))}
         </div>
-        {user?.commissions?.length > 0 && (
+        {(user?.commissions?.length ?? 0) > 0 && (
           <div className="mt-4 pt-4 border-t border-cream-100 flex flex-wrap items-center gap-2">
             <p className="text-xs text-navy-400 mr-1">{p.commissions}</p>
-            {user.commissions.map((c: string) => <Badge key={c} variant="info">{c}</Badge>)}
+            {user?.commissions?.map((c: string) => <Badge key={c} variant="info">{c}</Badge>)}
           </div>
         )}
       </Card>
@@ -416,7 +416,7 @@ export default function ProfilePage() {
             <Shield size={16} className="text-emerald-500 flex-shrink-0" />
             <div>
               <p className="text-xs font-semibold text-emerald-700">Cuenta verificada</p>
-              <p className="text-xs text-emerald-600">Tu correo electrónico está confirmado.</p>
+              <p className="text-xs text-emerald-600">Tu correo electrÃ³nico estÃ¡ confirmado.</p>
             </div>
           </div>
           <Button variant="outline" className="w-full justify-start" icon={<Key size={15} />} onClick={() => setPasswordModal(true)}>

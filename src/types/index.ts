@@ -26,7 +26,7 @@ export interface Event {
   location?: string;
   category: EventCategory;
   status: EventStatus;
-  max_participants?: number;
+  max_participants?: number | null;
   current_participants?: number;
   created_by: string;
   created_at: string;
